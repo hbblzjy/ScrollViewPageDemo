@@ -58,7 +58,7 @@
         _imgPageC.pageIndicatorTintColor = [UIColor yellowColor];
         [self addSubview:_imgPageC];
         
-        _timerR = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(imgMove) userInfo:nil repeats:YES];
+        _timerR = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(imgMove) userInfo:nil repeats:YES];
     }
     return self;
 }
@@ -66,6 +66,8 @@
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     _imgPageC.currentPage = _imgScrollV.contentOffset.x/_rectFrame.size.width;
+    //发射一个通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"imgClickImg" object:self userInfo:@{@"imgIndex":[NSString stringWithFormat:@"%d",_imgPageC.currentPage]}];
 }
 #pragma mark ------- 定时器方法
 -(void)imgMove
@@ -97,8 +99,9 @@
             _imgScrollV.contentOffset = CGPointMake(_imgScrollV.contentOffset.x+_speedI, 0);
             _imgPageC.currentPage = _imgScrollV.contentOffset.x/(_rectFrame.size.width);
         }
-        
     }
+    //发射一个通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"imgClickImg" object:self userInfo:@{@"imgIndex":[NSString stringWithFormat:@"%d",_imgPageC.currentPage]}];
 }
 
 /*

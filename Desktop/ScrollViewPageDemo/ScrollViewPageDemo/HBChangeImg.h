@@ -18,7 +18,10 @@
 @property(nonatomic,assign)CGRect rectFrame;//方位值
 @property(nonatomic,assign)NSInteger speedI;//滑动速度
 
-//初始化方法,三个参数必须填写
+/**初始化方法
+ 前两个参数必须填写
+ 第三个参数可为nil
+ */
 -(instancetype)initWithFrame:(CGRect)frame imgArray:(NSArray *)aImgArray styleStr:(NSString *)aStyleStr;
 
 @end
